@@ -7,7 +7,7 @@ public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
@@ -21,7 +21,7 @@ public class OrderItem {
     @JoinColumn(name = "topping_id", nullable = false)
     private Topping topping;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 

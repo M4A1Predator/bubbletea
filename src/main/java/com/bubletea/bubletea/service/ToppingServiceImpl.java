@@ -13,12 +13,12 @@ public class ToppingServiceImpl implements ToppingService {
     ToppingRepository toppingRepository;
 
     @Override
-    public List<Topping> findAll() {
+    public List<Topping> getAllToppings() {
         return toppingRepository.findAll();
     }
 
     @Override
-    public Topping findById(int id) {
+    public Topping getToppingById(int id) {
         return toppingRepository.findById(id);
     }
 }

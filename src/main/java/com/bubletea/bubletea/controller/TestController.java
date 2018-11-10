@@ -23,8 +23,8 @@ public class TestController {
     }
 
     @GetMapping("/user")
-    public CustomPrincipal getUser(OAuth2Authentication authentication) {
-        CustomPrincipal principal = (CustomPrincipal) authentication.getPrincipal();
+    public CustomPrincipal getUser(CustomPrincipal principal) {
+//        CustomPrincipal principal = (CustomPrincipal) authentication.getPrincipal();
         return principal;
     }
 }

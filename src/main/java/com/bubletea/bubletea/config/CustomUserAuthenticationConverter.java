@@ -26,7 +26,6 @@ public class CustomUserAuthenticationConverter implements UserAuthenticationConv
 
     @Override
     public Authentication extractAuthentication(Map<String, ?> map) {
-        System.out.println(Integer.parseInt(map.get(SUBJECT).toString()));
         if (map.containsKey(USERNAME))
             return new UsernamePasswordAuthenticationToken(
                     new CustomPrincipal(Integer.parseInt(map.get(SUBJECT).toString()), map.get(USERNAME).toString()), "N/A",

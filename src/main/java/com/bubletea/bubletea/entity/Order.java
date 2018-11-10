@@ -1,11 +1,13 @@
 package com.bubletea.bubletea.entity;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.repository.Temporal;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "[order]")
 public class Order {
 
     @Id
@@ -41,5 +43,25 @@ public class Order {
 
     public Date getCreatedAt() {
         return createdAt;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

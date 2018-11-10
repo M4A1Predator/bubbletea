@@ -15,4 +15,10 @@ public class UserServiceImpl implements UserService {
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+    @Override
+    public User getUserById(int id) {
+        User user = (User) userRepository.findById(id);
+        return user;
+    }
 }
