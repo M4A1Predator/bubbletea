@@ -1,5 +1,6 @@
 package com.bubletea.bubletea.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -7,6 +8,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
+@JsonIgnoreProperties({"password", "credentialsNonExpired"})
 public class User implements UserDetails {
 
     @Id
@@ -18,7 +20,7 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "role_user", joinColumns = {
             @JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = {
-            @JoinColumn(name = "role_id", referencedColumnName = "id") })
+                @JoinColumn(name = "role_id", referencedColumnName = "id") })
     private Collection<Role> roles;
 
     @Override

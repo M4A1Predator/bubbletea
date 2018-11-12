@@ -12,6 +12,13 @@ public class Menu {
     private Double pricePerUnit;
     private boolean enabled;
 
+    public Menu() {
+    }
+
+    public Menu(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

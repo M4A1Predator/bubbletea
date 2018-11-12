@@ -12,6 +12,13 @@ public class Topping {
     private double pricePerUnit;
     private boolean enabled;
 
+    public Topping() {
+    }
+
+    public Topping(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
