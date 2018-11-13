@@ -1,6 +1,6 @@
-package com.bubletea.bubletea.model.request;
+package com.bubletea.bubletea.model.dto;
 
-public class OrderItemRequest {
+public class OrderItemDto {
     private int menuId;
     private int toppingId;
 

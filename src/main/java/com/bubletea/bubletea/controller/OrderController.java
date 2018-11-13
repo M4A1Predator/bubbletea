@@ -2,8 +2,8 @@ package com.bubletea.bubletea.controller;
 
 import com.bubletea.bubletea.entity.*;
 import com.bubletea.bubletea.model.CustomPrincipal;
-import com.bubletea.bubletea.model.request.OrderItemRequest;
-import com.bubletea.bubletea.model.request.OrderRequest;
+import com.bubletea.bubletea.model.dto.OrderItemDto;
+import com.bubletea.bubletea.model.dto.OrderDto;
 import com.bubletea.bubletea.service.MenuService;
 import com.bubletea.bubletea.service.OrderService;
 import com.bubletea.bubletea.service.ToppingService;
@@ -43,14 +43,14 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<String> addOrder(CustomPrincipal principal, @RequestBody OrderRequest orderRequest){
+    public ResponseEntity<String> addOrder(CustomPrincipal principal, @RequestBody OrderDto orderDto){
         Order order = new Order();
         List<OrderItem> orderItems = new ArrayList<>();
-        List<OrderItemRequest> orderItemRequests = orderRequest.getOrderItems();
+        List<OrderItemDto> orderItemDtos = orderDto.getOrderItems();
         double totalPrice = 0.00;
 
         // Construct order items data
-        for (OrderItemRequest oir: orderItemRequests) {
+        for (OrderItemDto oir: orderItemDtos) {
             OrderItem oi = new OrderItem();
             oi.setOrder(order);
 
