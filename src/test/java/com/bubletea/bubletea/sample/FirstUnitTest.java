@@ -1,6 +1,7 @@
 package com.bubletea.bubletea.sample;
 
 import com.bubletea.bubletea.entity.Menu;
+import com.bubletea.bubletea.sample.constant.UserRole;
 import com.bubletea.bubletea.service.MenuService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,14 +20,12 @@ public class FirstUnitTest {
     @Autowired
     MenuService menuService;
 
-    @Test
-    public void testAssertArrayEquals() {
-//        byte[] expected = "trial".getBytes();
-//        byte[] actual = "trial".getBytes();
-//        assertArrayEquals("failure - byte arrays not same", expected, actual);
-        List<Menu> menus = menuService.getAllMenus();
-        int expected = 2;
+//    @Test
+//    public void testAssertArrayEquals() {
+//        List<Menu> menus = menuService.getAllMenus();
+//        int expected = 2;
+//
+//        assertEquals(expected, menus.size());
+//    }
 
-        assertEquals(expected, menus.size());
-    }
 }

@@ -3,10 +3,7 @@ package com.bubletea.bubletea.controller;
 import com.bubletea.bubletea.entity.Menu;
 import com.bubletea.bubletea.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -24,7 +21,6 @@ public class MenuController {
 
     @GetMapping("/{menuId}")
     public Menu getMenu(@PathVariable("menuId")int id, Principal principal) {
-        System.out.println(principal);
         Menu menu = menuService.getMenuById(id);
         return menu;
     }

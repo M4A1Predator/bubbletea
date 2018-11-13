@@ -24,6 +24,8 @@ public class OrderItem {
     @JoinColumn(name = "topping_id", nullable = false)
     private Topping topping;
 
+    private String name;
+
     private double price;
 
     public int getId() {
@@ -64,5 +66,13 @@ public class OrderItem {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

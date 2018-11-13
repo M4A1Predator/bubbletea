@@ -5,6 +5,7 @@ import com.bubletea.bubletea.model.CustomPrincipal;
 import com.bubletea.bubletea.repository.UserRepository;
 import com.bubletea.bubletea.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +29,8 @@ public class TestController {
     }
 
     @GetMapping("/user")
+//    @PreAuthorize("hasAuthority('user')")
     public User getUser(CustomPrincipal principal) {
-//        CustomPrincipal principal = (CustomPrincipal) authentication.getPrincipal();
         return userRepository.findById(principal.getId());
     }
 }

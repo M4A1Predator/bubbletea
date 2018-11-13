@@ -4,7 +4,9 @@ import com.bubletea.bubletea.entity.*;
 import com.bubletea.bubletea.model.CustomPrincipal;
 import com.bubletea.bubletea.model.request.OrderItemRequest;
 import com.bubletea.bubletea.model.request.OrderRequest;
+import com.bubletea.bubletea.service.MenuService;
 import com.bubletea.bubletea.service.OrderService;
+import com.bubletea.bubletea.service.ToppingService;
 import com.bubletea.bubletea.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +26,12 @@ public class OrderController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    MenuService menuService;
+
+    @Autowired
+    ToppingService toppingService;
+
     @GetMapping
     public List<Order> getOrders() {
         return orderService.getAllOrders();
@@ -37,26 +45,41 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<String> addOrder(CustomPrincipal principal, @RequestBody OrderRequest orderRequest){
         Order order = new Order();
-        List<OrderItem> orderItems = new ArrayList<OrderItem>();
+        List<OrderItem> orderItems = new ArrayList<>();
         List<OrderItemRequest> orderItemRequests = orderRequest.getOrderItems();
+        double totalPrice = 0.00;
 
         // Construct order items data
         for (OrderItemRequest oir: orderItemRequests) {
             OrderItem oi = new OrderItem();
-            oi.setMenu(new Menu(oir.getMenuId()));
             oi.setOrder(order);
 
+            double price = 0.00;
+
+            // Get menu data
+            Menu menu = menuService.getMenuById(oir.getMenuId());
+            price += menu.getPricePerUnit();
+            oi.setMenu(menu);
+
+            // Get topping data
             if (oir.getToppingId() != 0) {
-                oi.setTopping(new Topping(oir.getToppingId()));
+                Topping topping = toppingService.getToppingById(oir.getToppingId());
+                price += topping.getPricePerUnit();
+                oi.setTopping(topping);
             }
-            oi.setPrice(0.00);
+
+            // Calculate price
+            oi.setPrice(price);
+            totalPrice += price;
+
+            // Add to list
             orderItems.add(oi);
         }
 
         // Set user data for order
         User user = userService.getUserById(principal.getId());
         order.setUser(user);
-        order.setTotalPrice(0);
+        order.setTotalPrice(totalPrice);
         order.setOrderItems(orderItems);
 
         // Save order
